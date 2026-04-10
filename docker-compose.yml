@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  oltp_db:
+    image: postgres:15
+    container_name: Etl-db-oltp
+    environment:
+      POSTGRES_USER: oltpuser
+      POSTGRES_PASSWORD: 123456
+      POSTGRES_DB: etldb_oltp
+    ports:
+      - "5432:5432"
+    volumes:
+      - etl-db-oltp:/var/lib/postgresql/data
+  dw_db:
+    image: postgres:15
+    container_name: Etl-db-dw
+    environment:
+      POSTGRES_USER: gouser
+      POSTGRES_PASSWORD: 123456
+      POSTGRES_DB: etldb_dw
+    ports:
+      - "5433:5432"
+    volumes:
+      - etl-db-dw:/var/lib/postgresql/data
+
+volumes:
+  etl-db-dw:
+  etl-db-oltp:
